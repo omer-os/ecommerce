@@ -28,7 +28,7 @@ export default async function Page({
       <h1 className="mt-4 text-3xl font-bold">Category Name</h1>
       <p className="text-muted-foreground mt-1">Category Description</p>
       <div className="mt-3">
-        <DsProductsGrid products={products} />
+        <DsProductsGrid categoryId={params.categoryId} products={products} />
       </div>
     </div>
   );

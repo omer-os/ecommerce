@@ -12,14 +12,17 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import DsRemoveProductAlert from "../alert-dialogs/ds-remove-product-alert";
+import UpdateProductSheet from "../sheets/update-product-sheet";
 
 export default function DsProductCard({ product }: { product: Product }) {
   return (
     <Card className="relative">
       <div className="absolute end-4 top-4">
-        <Button size={"icon"} variant={"outline"}>
-          <Edit size={16} />
-        </Button>
+        <UpdateProductSheet product={product}>
+          <Button size={"icon"} variant={"outline"}>
+            <Edit size={16} />
+          </Button>
+        </UpdateProductSheet>
       </div>
 
       <CardHeader className="p-2">

@@ -9,7 +9,7 @@ import { Input } from "~/components/ui/input";
 export default async function DsNavbar() {
   const session = await getServerAuthSession();
   return (
-    <div className="bg-secondary/40 flex h-[60px] items-center border-b">
+    <div className="bg-secondary/40 sticky left-0 top-0 z-30 flex h-[60px] items-center border-b backdrop-blur-xl">
       <div className="flex flex-1 items-center justify-between p-4">
         {/* <span className="font-semibold">Fintech Dashboard</span> */}
         <Input

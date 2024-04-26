@@ -12,14 +12,17 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import DsRemoveCategoryAlert from "../alert-dialogs/ds-remove-category-alert";
+import UpdateCategorySheet from "../sheets/update-category-sheet";
 
 export default function DsCategoryCard({ category }: { category: Category }) {
   return (
     <Card className="relative">
       <div className="absolute end-4 top-4">
-        <Button size={"icon"} variant={"outline"}>
-          <Edit size={16} />
-        </Button>
+        <UpdateCategorySheet category={category}>
+          <Button size={"icon"} variant={"outline"}>
+            <Edit size={16} />
+          </Button>
+        </UpdateCategorySheet>
       </div>
 
       <CardHeader className="p-2">

@@ -4,6 +4,7 @@ import { z } from "zod";
 import { db } from "../db";
 import { ProductModel } from "prisma/zod";
 import { getServerAuthSession } from "../auth";
+import { revalidatePath } from "next/cache";
 
 // queries
 export const getProducts = async ({ categoryId }: { categoryId: string }) => {
@@ -29,9 +30,15 @@ export const createProduct = async (input: z.infer<typeof ProductModel>) => {
     throw new Error("Unauthorized");
   }
 
-  return db.product.create({
+  const res = await db.product.create({
     data: input,
   });
+
+  if (res) {
+    revalidatePath(`/dashboard/products/${res.categoryId}`);
+  }
+
+  return res;
 };
 
 export const updateProduct = async (input: z.infer<typeof ProductModel>) => {
@@ -40,12 +47,18 @@ export const updateProduct = async (input: z.infer<typeof ProductModel>) => {
     throw new Error("Unauthorized");
   }
 
-  return db.product.update({
+  const res = await db.product.update({
     where: {
       id: input.id,
     },
     data: input,
   });
+
+  if (res) {
+    revalidatePath(`/dashboard/products/${res.categoryId}`);
+  }
+
+  return res;
 };
 
 export const deleteProduct = async ({ id }: { id: string }) => {
@@ -54,9 +67,17 @@ export const deleteProduct = async ({ id }: { id: string }) => {
     throw new Error("Unauthorized");
   }
 
-  return db.product.delete({
+  const res = await db.product.delete({
     where: {
       id,
     },
   });
+
+  if (res) {
+    console.log(res.categoryId);
+
+    revalidatePath(`/dashboard/products/${res.categoryId}`);
+  }
+
+  return res;
 };
