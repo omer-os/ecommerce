@@ -1,12 +1,18 @@
+import StCategoriesGrid from "~/components/custom/grids/st-categories-grid";
+import { getCategories } from "~/server/actions/category";
 import { getServerAuthSession } from "~/server/auth";
 
 export default async function HomePage() {
+  const categories = await getCategories();
   return (
-    <main>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. At, accusantium.
-      Obcaecati adipisci autem quidem numquam dignissimos necessitatibus,
-      assumenda amet exercitationem quae dolorum eos et inventore omnis,
-      doloremque cupiditate magnam? Recusandae.
-    </main>
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold">Categories</h1>
+      <p className="text-muted-foreground">
+        Below is a list of categories we have available for you.
+      </p>
+      <div className="mt-4">
+        <StCategoriesGrid categories={categories} />
+      </div>
+    </div>
   );
 }

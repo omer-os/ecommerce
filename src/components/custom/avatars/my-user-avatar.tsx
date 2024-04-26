@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import LogoutButton from "../buttons/logout-button";
+import Link from "next/link";
 
 export default function MyUserAvatar({ session }: { session: Session | null }) {
   return (
@@ -34,7 +35,14 @@ export default function MyUserAvatar({ session }: { session: Session | null }) {
           <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           {session?.user?.role === "ADMIN" && (
-            <DropdownMenuItem>Dashboard</DropdownMenuItem>
+            <Link href="/dashboard">
+              <DropdownMenuItem>Dashboard</DropdownMenuItem>
+            </Link>
+          )}
+          {session?.user?.role === "ADMIN" && (
+            <Link href="/">
+              <DropdownMenuItem>Store</DropdownMenuItem>
+            </Link>
           )}
           <LogoutButton>
             <DropdownMenuItem>Logout</DropdownMenuItem>
