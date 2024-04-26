@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import DsRemoveProductAlert from "../alert-dialogs/ds-remove-product-alert";
 
 export default function DsProductCard({ product }: { product: Product }) {
   return (
@@ -48,9 +49,15 @@ export default function DsProductCard({ product }: { product: Product }) {
             View Product
           </Button>
         </Link>
-        <Button variant={"destructive"} className="flex-1 text-xs" size={"sm"}>
-          Remove Product
-        </Button>
+        <DsRemoveProductAlert product={product}>
+          <Button
+            variant={"destructive"}
+            className="flex-1 text-xs"
+            size={"sm"}
+          >
+            Remove Product
+          </Button>
+        </DsRemoveProductAlert>
       </CardFooter>
     </Card>
   );

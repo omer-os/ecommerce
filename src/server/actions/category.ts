@@ -4,6 +4,7 @@ import { z } from "zod";
 import { db } from "../db";
 import { CategoryModel } from "prisma/zod";
 import { getServerAuthSession } from "../auth";
+import { revalidatePath } from "next/cache";
 
 // queries
 export const getCategories = async () => {
@@ -24,10 +25,15 @@ export const createCategory = async (input: z.infer<typeof CategoryModel>) => {
   if (!session || session.user.role !== "ADMIN") {
     throw new Error("Unauthorized");
   }
-
-  return db.category.create({
+  const res = await db.category.create({
     data: input,
   });
+
+  if (res) {
+    revalidatePath("/dashboard/categories");
+  }
+
+  return res;
 };
 
 export const updateCategory = async (input: z.infer<typeof CategoryModel>) => {
@@ -35,13 +41,18 @@ export const updateCategory = async (input: z.infer<typeof CategoryModel>) => {
   if (!session || session.user.role !== "ADMIN") {
     throw new Error("Unauthorized");
   }
-
-  return db.category.update({
+  const res = await db.category.update({
     where: {
       id: input.id,
     },
     data: input,
   });
+
+  if (res) {
+    revalidatePath("/dashboard/categories");
+  }
+
+  return res;
 };
 
 export const deleteCategory = async ({ id }: { id: string }) => {
@@ -50,9 +61,15 @@ export const deleteCategory = async ({ id }: { id: string }) => {
     throw new Error("Unauthorized");
   }
 
-  return db.category.delete({
+  const res = await db.category.delete({
     where: {
       id,
     },
   });
+
+  if (res) {
+    revalidatePath("/dashboard/categories");
+  }
+
+  return res;
 };

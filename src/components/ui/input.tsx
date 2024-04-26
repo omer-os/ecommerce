@@ -12,8 +12,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={cn(
-          "border-input ring-offset-background focus-within:ring-ring bg-background flex h-10 items-center rounded-md border pl-3 text-sm focus-within:ring-1 focus-within:ring-offset-2",
+          "border-input ring-offset-background focus-within:ring-ring bg-background flex h-10 items-center rounded-md border pl-1 text-sm focus-within:ring-1 focus-within:ring-offset-2",
           className,
+          {
+            "!pl-2": startIcon,
+          },
         )}
       >
         {startIcon}

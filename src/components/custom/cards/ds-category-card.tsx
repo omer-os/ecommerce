@@ -11,8 +11,9 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import DsRemoveCategoryAlert from "../alert-dialogs/ds-remove-category-alert";
 
-export default function DsCategoriesCard({ category }: { category: Category }) {
+export default function DsCategoryCard({ category }: { category: Category }) {
   return (
     <Card className="relative">
       <div className="absolute end-4 top-4">
@@ -32,9 +33,9 @@ export default function DsCategoriesCard({ category }: { category: Category }) {
       </CardHeader>
 
       <CardContent className="p-2 pt-1">
-        <CardTitle className="text-lg">Category Name</CardTitle>
+        <CardTitle className="text-lg">{category.name}</CardTitle>
         <CardDescription className="line-clamp-1 text-xs">
-          Category Description
+          {category.description}
         </CardDescription>
       </CardContent>
 
@@ -47,9 +48,15 @@ export default function DsCategoriesCard({ category }: { category: Category }) {
             View Category
           </Button>
         </Link>
-        <Button variant={"destructive"} className="flex-1 text-xs" size={"sm"}>
-          Remove Category
-        </Button>
+        <DsRemoveCategoryAlert category={category}>
+          <Button
+            variant={"destructive"}
+            className="flex-1 text-xs"
+            size={"sm"}
+          >
+            Remove Category
+          </Button>
+        </DsRemoveCategoryAlert>
       </CardFooter>
     </Card>
   );
