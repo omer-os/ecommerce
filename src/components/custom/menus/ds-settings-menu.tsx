@@ -13,45 +13,29 @@ import Link from "next/link";
 import { cn } from "~/lib/utils";
 import { usePathname } from "next/navigation";
 
-export default function DsSidebarMenu() {
+export default function DsSettingsMenu() {
   const pathname = usePathname();
 
   const isActive = (href: string) => {
-    if (href === "/dashboard" && pathname === "/dashboard") return true;
+    if (href === "/dashboard/settings" && pathname === "/dashboard/settings")
+      return true;
 
-    if (href !== "/dashboard" && pathname.startsWith(href)) return true;
+    if (href !== "/dashboard/settings" && pathname.startsWith(href))
+      return true;
   };
 
   return (
-    <nav className="grid items-start px-4 text-sm font-medium">
-      <div className="text-muted-foreground mb-2 text-sm capitalize">
-        overview
-      </div>
+    <div className="grid items-start px-4 text-sm font-medium">
       {[
         {
-          icon: HomeIcon,
-          label: "Dashboard",
-          href: "/dashboard",
-        },
-        {
-          icon: WalletIcon,
-          label: "Products",
-          href: "/dashboard/products",
-        },
-        {
-          icon: BarChartIcon,
-          label: "Investments",
-          href: "/dashboard/investments",
-        },
-        {
-          icon: CreditCardIcon,
-          label: "Transactions",
-          href: "/dashboard/transactions",
+          icon: SettingsIcon,
+          label: "Profile",
+          href: "/dashboard/settings",
         },
         {
           icon: SettingsIcon,
-          label: "Settings",
-          href: "/dashboard/settings",
+          label: "theme",
+          href: "/dashboard/settings/theme",
         },
       ].map((item, index) => (
         <Link
@@ -69,6 +53,6 @@ export default function DsSidebarMenu() {
           {item.label}
         </Link>
       ))}
-    </nav>
+    </div>
   );
 }

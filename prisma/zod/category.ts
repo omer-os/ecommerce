@@ -5,6 +5,7 @@ export const CategoryModel = z.object({
   id: z.string().optional(),
   name: z.string(),
   description: z.string().nullish(),
+  imageUrl: z.string().nullish(),
 })
 
 export interface CompleteCategory extends z.infer<typeof CategoryModel> {
