@@ -40,13 +40,13 @@ export default function DsSidebarMenu() {
         },
         {
           icon: BarChartIcon,
-          label: "Investments",
-          href: "/dashboard/investments",
+          label: "Admins",
+          href: "/dashboard/admins",
         },
         {
           icon: CreditCardIcon,
-          label: "Transactions",
-          href: "/dashboard/transactions",
+          label: "Users",
+          href: "/dashboard/users",
         },
         {
           icon: SettingsIcon,
