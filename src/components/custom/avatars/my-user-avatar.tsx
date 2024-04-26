@@ -33,8 +33,9 @@ export default function MyUserAvatar({ session }: { session: Session | null }) {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          {session?.user?.role === "ADMIN" && (
+            <DropdownMenuItem>Dashboard</DropdownMenuItem>
+          )}
           <LogoutButton>
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </LogoutButton>
