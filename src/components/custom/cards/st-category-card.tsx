@@ -1,3 +1,4 @@
+"use client";
 import { Category } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
@@ -8,10 +9,16 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { AddCategoryView } from "~/server/actions/category";
 
 export default function StCategoryCard({ category }: { category: Category }) {
+  const addCategoryView = async () => {
+    const res = await AddCategoryView({
+      category: category,
+    });
+  };
   return (
-    <Link href={`/categories/${category.id}`}>
+    <Link onClick={addCategoryView} href={`/categories/${category.id}`}>
       <Card>
         <CardHeader className="p-0">
           <div className="h-[10em]">

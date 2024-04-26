@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteProduct, RelatedProductModel } from "./index"
+import { CompleteProduct, RelatedProductModel, CompleteCategoryView, RelatedCategoryViewModel } from "./index"
 
 export const CategoryModel = z.object({
   id: z.string().optional(),
@@ -10,6 +10,7 @@ export const CategoryModel = z.object({
 
 export interface CompleteCategory extends z.infer<typeof CategoryModel> {
   Product: CompleteProduct[]
+  CategoryView: CompleteCategoryView[]
 }
 
 /**
@@ -19,4 +20,5 @@ export interface CompleteCategory extends z.infer<typeof CategoryModel> {
  */
 export const RelatedCategoryModel: z.ZodSchema<CompleteCategory> = z.lazy(() => CategoryModel.extend({
   Product: RelatedProductModel.array(),
+  CategoryView: RelatedCategoryViewModel.array(),
 }))

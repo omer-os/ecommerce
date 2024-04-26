@@ -1,11 +1,11 @@
 generator zod {
-  provider                 = "zod-prisma"
-  output                   = "./zod"
-  relationModel            = true 
-  modelCase                = "PascalCase"
-  modelSuffix              = "Model"
-  useDecimalJs             = true 
-  prismaJsonNullability    = true 
+  provider              = "zod-prisma"
+  output                = "./zod"
+  relationModel         = true
+  modelCase             = "PascalCase"
+  modelSuffix           = "Model"
+  useDecimalJs          = true
+  prismaJsonNullability = true
 }
 
 generator client {
@@ -43,12 +43,11 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-
 model Store {
-  id          String    @id @default(cuid())
+  id          String  @id @default(cuid())
   name        String
   description String?
-  logoUrl    String?
+  logoUrl     String?
   address     String?
   phone       String?
   email       String?
@@ -56,14 +55,16 @@ model Store {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?        @unique
   emailVerified DateTime?
   image         String?
-  role          UserRole  @default(USER)
+  role          UserRole       @default(USER)
   accounts      Account[]
   sessions      Session[]
+  ProductView   ProductView[]
+  CategoryView  CategoryView[]
 }
 
 model VerificationToken {
@@ -75,21 +76,41 @@ model VerificationToken {
 }
 
 model Category {
-  id          String    @id @default(cuid()) /// @zod.optional()
-  name        String
-  description String?
-  Product     Product[]
-  imageUrl    String?
+  id           String         @id @default(cuid()) /// @zod.optional()
+  name         String
+  description  String?
+  Product      Product[]
+  imageUrl     String?
+  CategoryView CategoryView[]
 }
 
 model Product {
-  id          String   @id @default(cuid()) /// @zod.optional()
+  id          String        @id @default(cuid()) /// @zod.optional()
   name        String
   description String?
-  price       Float   @default(0) 
+  price       Float         @default(0)
   image       String?
   categoryId  String
-  Category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  Category    Category      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  ProductView ProductView[]
+}
+
+model ProductView {
+  id        String   @id @default(cuid())
+  productId String
+  userId    String?
+  viewedAt  DateTime @default(now())
+  Product   Product  @relation(fields: [productId], references: [id])
+  User      User?    @relation(fields: [userId], references: [id])
+}
+
+model CategoryView {
+  id         String   @id @default(cuid())
+  categoryId String
+  userId     String?
+  viewedAt   DateTime @default(now())
+  Category   Category @relation(fields: [categoryId], references: [id])
+  User       User?    @relation(fields: [userId], references: [id])
 }
 
 enum UserRole {

@@ -40,6 +40,15 @@ export const getUser = async ({ id }: { id: string }) => {
   });
 };
 
+export const getTotalUsersCount = async () => {
+  const session = await getServerAuthSession();
+  if (!session || session.user.role !== "ADMIN") {
+    throw new Error("Unauthorized");
+  }
+
+  return db.user.count();
+};
+
 // mutations
 export const removeAdmin = async ({ id }: { id: string }) => {
   const session = await getServerAuthSession();

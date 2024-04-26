@@ -23,6 +23,15 @@ export const getProduct = async ({ id }: { id: string }) => {
   });
 };
 
+export const GetTotalProductsViews = async () => {
+  const session = await getServerAuthSession();
+  if (!session || session.user.role !== "ADMIN") {
+    throw new Error("Unauthorized");
+  }
+
+  return db.productView.count();
+};
+
 // mutations
 export const createProduct = async (input: z.infer<typeof ProductModel>) => {
   const session = await getServerAuthSession();
