@@ -3,10 +3,13 @@ import React from "react";
 import {
   BarChartIcon,
   BellIcon,
+  BoxIcon,
   CreditCardIcon,
   DollarSignIcon,
   HomeIcon,
+  Lock,
   SettingsIcon,
+  Users,
   WalletIcon,
 } from "lucide-react";
 import Link from "next/link";
@@ -34,17 +37,17 @@ export default function DsSidebarMenu() {
           href: "/dashboard",
         },
         {
-          icon: WalletIcon,
+          icon: BoxIcon,
           label: "Products",
           href: "/dashboard/products",
         },
         {
-          icon: BarChartIcon,
+          icon: Lock,
           label: "Admins",
           href: "/dashboard/admins",
         },
         {
-          icon: CreditCardIcon,
+          icon: Users,
           label: "Users",
           href: "/dashboard/users",
         },

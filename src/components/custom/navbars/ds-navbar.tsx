@@ -16,6 +16,7 @@ export default async function DsNavbar() {
           placeholder="Search"
           startIcon={<Search className="text-muted-foreground h-4 w-4" />}
           className="hidden w-[30em] lg:flex"
+          type="search"
         />
 
         <>

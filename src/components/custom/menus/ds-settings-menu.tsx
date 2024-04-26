@@ -25,12 +25,17 @@ export default function DsSettingsMenu() {
   };
 
   return (
-    <div className="grid items-start px-4 text-sm font-medium">
+    <div className="grid items-start text-sm font-medium">
       {[
         {
           icon: SettingsIcon,
           label: "Profile",
           href: "/dashboard/settings",
+        },
+        {
+          icon: SettingsIcon,
+          label: "Store",
+          href: "/dashboard/settings/store",
         },
         {
           icon: SettingsIcon,
