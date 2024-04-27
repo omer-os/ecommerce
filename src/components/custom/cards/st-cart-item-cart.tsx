@@ -16,14 +16,30 @@ export default function StCartItemCart({
 
   useEffect(() => {
     setOrders((prev) => {
+      const updatedProducts = prev.products.map((p) => {
+        if (p.id === product.id) {
+          return {
+            ...p,
+            quantity: count,
+          };
+        }
+        return p;
+      });
+
       return {
         ...prev,
-        products: [
-          ...prev.products.filter((p) => p.id !== product.id),
-          ...Array(count).fill(product),
-        ],
+        products: updatedProducts,
       };
     });
+
+    if (count === 0) {
+      setOrders((prev) => {
+        return {
+          ...prev,
+          products: prev.products.filter((p) => p.id !== product.id),
+        };
+      });
+    }
   }, [count]);
 
   return (

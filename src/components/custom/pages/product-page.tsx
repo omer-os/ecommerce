@@ -3,10 +3,19 @@ import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import AddToCartButton from "../buttons/add-to-cart-button";
 import { Product } from "@prisma/client";
+import GobackButton from "../buttons/goback-button";
+import { ChevronLeft } from "lucide-react";
 
 export default function ProductPage({ product }: { product: Product | null }) {
   return (
-    <div className="pt-10">
+    <div className="pt-4">
+      <GobackButton>
+        <Button variant={"secondary"} className="mb-4">
+          <ChevronLeft size={16} />
+          Go Back
+        </Button>
+      </GobackButton>
+
       <div className="flex flex-col items-center gap-5 lg:flex-row">
         <div className="flex w-full gap-5 lg:w-max">
           <div className="flex flex-col gap-5">

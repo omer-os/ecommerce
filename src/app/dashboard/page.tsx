@@ -2,6 +2,7 @@ import { DollarSign, User, View } from "lucide-react";
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { GetTotalCategoriesViews } from "~/server/actions/category";
+import { GetTotalOrdersNumber } from "~/server/actions/order";
 import { GetTotalProductsViews } from "~/server/actions/product";
 import { getTotalUsersCount } from "~/server/actions/user";
 
@@ -9,6 +10,7 @@ export default async function Page() {
   const productsViews = await GetTotalProductsViews();
   const categoriesViews = await GetTotalCategoriesViews();
   const totalUsersCount = await getTotalUsersCount();
+  const totalOrdersNumber = await GetTotalOrdersNumber();
 
   return (
     <div className="p-4">
@@ -28,10 +30,10 @@ export default async function Page() {
             description: "includes categories and products views",
           },
           {
-            title: "Total Users",
-            value: "2000",
+            title: "Total Orders",
+            value: `${totalOrdersNumber}`,
             icon: DollarSign,
-            description: "includes users and admins.",
+            description: "includes all orders.",
           },
           {
             title: "Total Users",

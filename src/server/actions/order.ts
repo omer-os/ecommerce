@@ -4,6 +4,21 @@ import { db } from "../db";
 import { getServerAuthSession } from "../auth";
 import { Product } from "@prisma/client";
 
+// queries
+export const GetTotalOrdersNumber = async () => {
+  const session = await getServerAuthSession();
+
+  if (!session) throw new Error("Not authenticated");
+
+  const orders = await db.order.findMany({
+    where: {
+      userId: session.user.id,
+    },
+  });
+
+  return orders.length;
+};
+
 // mutations
 export const createOrder = async ({ products }: { products: Product[] }) => {
   const session = await getServerAuthSession();
