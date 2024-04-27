@@ -65,6 +65,7 @@ model User {
   sessions      Session[]
   ProductView   ProductView[]
   CategoryView  CategoryView[]
+  orders        Order[]
 }
 
 model VerificationToken {
@@ -93,6 +94,7 @@ model Product {
   categoryId  String
   Category    Category      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   ProductView ProductView[]
+  OrderDetail OrderDetail[]
 }
 
 model ProductView {
@@ -113,7 +115,34 @@ model CategoryView {
   User       User?    @relation(fields: [userId], references: [id])
 }
 
+model Order {
+  id        String        @id @default(cuid())
+  userId    String
+  createdAt DateTime      @default(now())
+  User      User          @relation(fields: [userId], references: [id])
+  details   OrderDetail[]
+  orderDate DateTime?
+  status    orderStatus   @default(PENDING)
+  total     Float         @default(0)
+}
+
+model OrderDetail {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float
+  Order     Order   @relation(fields: [orderId], references: [id])
+  Product   Product @relation(fields: [productId], references: [id])
+}
+
 enum UserRole {
   ADMIN
   USER
+}
+
+enum orderStatus {
+  PENDING
+  PROCESSING
+  CANCELLED
 }

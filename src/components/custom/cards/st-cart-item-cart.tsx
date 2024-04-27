@@ -1,24 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CounterButton from "../buttons/crounter-button";
+import { Product } from "@prisma/client";
+import { ordersAtom } from "~/lib/global-atoms";
+import { useAtom } from "jotai";
 
-export default function StCartItemCart() {
+export default function StCartItemCart({
+  product,
+  quantity,
+}: {
+  product: Product;
+  quantity: number;
+}) {
+  const [count, setCount] = useState(quantity);
+  const [orders, setOrders] = useAtom(ordersAtom);
+
+  useEffect(() => {
+    setOrders((prev) => {
+      return {
+        ...prev,
+        products: [
+          ...prev.products.filter((p) => p.id !== product.id),
+          ...Array(count).fill(product),
+        ],
+      };
+    });
+  }, [count]);
+
   return (
     <div className="flex gap-3 border-b py-3">
       <div className="h-16 w-16 rounded-lg border bg-secondary/50">
         <img
-          src="https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0754%2F3727%2F7491%2Ffiles%2Fcup-black.png%3Fv%3D1690003088&w=128&q=75"
+          src={product.image ?? ""}
           alt=""
+          className="h-full w-full object-contain object-center"
         />
       </div>
 
       <div className="flex flex-1 flex-col">
-        <div className="font-bold">Acme Product</div>
-        <div className="text-sm text-muted-foreground">Category name</div>
+        <div className="font-bold">{product.name}</div>
+        <div className="line-clamp-1 text-sm text-muted-foreground">
+          {product.description}
+        </div>
       </div>
       <div className="flex flex-col items-end gap-2">
-        <div className="font-semibold">9,000 IQD</div>
+        <div className="font-semibold">
+          {product.price.toLocaleString()} IQD
+        </div>
 
-        <CounterButton />
+        <CounterButton value={count} setValue={setCount} />
       </div>
     </div>
   );

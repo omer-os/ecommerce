@@ -6,6 +6,7 @@ import LoginButton from "../buttons/login-button";
 import MyUserAvatar from "../avatars/my-user-avatar";
 import { LogIn, ShoppingBag } from "lucide-react";
 import StCartSheet from "../sheets/st-cart-sheet";
+import Link from "next/link";
 
 export default async function StNavbar() {
   const session = await getServerAuthSession();
@@ -13,7 +14,9 @@ export default async function StNavbar() {
   return (
     <nav className="sticky left-0 top-0 z-30 h-[60px] border-b bg-secondary/40 backdrop-blur-xl">
       <div className="container mx-auto flex h-full items-center justify-between">
-        <div className="text-xl font-semibold">Store Name</div>
+        <Link href="/">
+          <div className="text-xl font-semibold">Store Name</div>
+        </Link>
 
         <div className="flex items-center gap-4">
           <StCartSheet>
