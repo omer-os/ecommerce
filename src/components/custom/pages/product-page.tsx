@@ -20,13 +20,13 @@ export default function ProductPage({ product }: { product: Product | null }) {
       </GobackButton>
 
       <div className="flex flex-col items-center gap-5 lg:flex-row">
-        <div className="flex w-full gap-5 lg:w-max">
-          <div className="flex flex-col gap-5">
+        <div className="flex w-full flex-col gap-5 sm:flex-row lg:w-max">
+          <div className="flex flex-row gap-5 sm:flex-col">
             {product?.imageUrls.slice(0, 3).map((url, index) => (
               <div
                 key={index}
                 className={cn(
-                  "h-[10.8em] w-[10.8em] rounded border bg-card ring-0 transition-all",
+                  "h-[10.8em] w-[10.8em] rounded border ring-0 transition-all",
                   {
                     "border-4 ring ": selectedImage === index,
                   },
@@ -36,17 +36,17 @@ export default function ProductPage({ product }: { product: Product | null }) {
                 <img
                   src={url}
                   alt="product"
-                  className="h-full w-full rounded border bg-card"
+                  className="h-full w-full rounded border bg-secondary/20 object-contain"
                 />
               </div>
             ))}
           </div>
 
-          <div className="h-[35em] flex-1 rounded border bg-card lg:w-[35em]">
+          <div className="h-[35em] flex-1 rounded border lg:w-[35em]">
             <img
               src={product?.imageUrls[selectedImage]}
               alt="product"
-              className="h-full w-full rounded border bg-card"
+              className="h-full w-full rounded border bg-secondary/20 object-contain"
             />
           </div>
         </div>

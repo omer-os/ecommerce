@@ -18,7 +18,7 @@ export default async function Page() {
       <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
           {
-            title: "Sginups",
+            title: "Total Users",
             value: `${totalUsersCount}`,
             icon: User,
             description: "includes users and admins.",
