@@ -28,7 +28,7 @@ export default function DsProductCard({ product }: { product: Product }) {
       <CardHeader className="p-2">
         <div className="h-[10em]">
           <img
-            src={product.image ?? ""}
+            src={product.imageUrls[0] ?? ""}
             alt="Product Image"
             className="h-full w-full rounded-lg object-cover"
           />

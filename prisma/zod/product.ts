@@ -7,6 +7,7 @@ export const ProductModel = z.object({
   description: z.string().nullish(),
   price: z.number(),
   image: z.string().nullish(),
+  imageUrls: z.string().array(),
   categoryId: z.string(),
 })
 

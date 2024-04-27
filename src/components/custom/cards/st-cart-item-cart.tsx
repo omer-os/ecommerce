@@ -46,7 +46,7 @@ export default function StCartItemCart({
     <div className="flex gap-3 border-b py-3">
       <div className="h-16 w-16 rounded-lg border bg-secondary/50">
         <img
-          src={product.image ?? ""}
+          src={product.imageUrls[0] ?? ""}
           alt=""
           className="h-full w-full object-contain object-center"
         />

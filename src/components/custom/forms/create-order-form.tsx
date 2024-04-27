@@ -1,6 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -39,6 +40,7 @@ export default function CreateOrderForm() {
           price: product.price,
           image: product.image,
           categoryId: product.categoryId,
+          imageUrls: product.imageUrls,
         })),
       ],
     });
@@ -55,6 +57,8 @@ export default function CreateOrderForm() {
     }
 
     setLoading(false);
+
+    redirect("/");
   };
 
   return (

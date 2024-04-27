@@ -31,6 +31,7 @@ export default function OrderSummary() {
                     price: 0,
                     image: null,
                     categoryId: "",
+                    imageUrls: [],
                   }
                 }
                 key={productId}

@@ -9,7 +9,7 @@ export default function StProductCard({ product }: { product: Product }) {
       <Card>
         <CardHeader className="p-0">
           <img
-            src={product.image || ""}
+            src={product.imageUrls[0] || ""}
             alt="Product Image"
             className="h-[10em] w-full rounded-t-lg object-cover"
           />
