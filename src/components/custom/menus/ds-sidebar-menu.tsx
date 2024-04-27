@@ -27,7 +27,7 @@ export default function DsSidebarMenu() {
 
   return (
     <nav className="grid items-start px-4 text-sm font-medium">
-      <div className="text-muted-foreground mb-2 text-sm capitalize">
+      <div className="mb-2 text-sm capitalize text-muted-foreground">
         overview
       </div>
       {[
@@ -52,6 +52,11 @@ export default function DsSidebarMenu() {
           href: "/dashboard/users",
         },
         {
+          icon: Users,
+          label: "Orders",
+          href: "/dashboard/orders",
+        },
+        {
           icon: SettingsIcon,
           label: "Settings",
           href: "/dashboard/settings",
@@ -60,7 +65,7 @@ export default function DsSidebarMenu() {
         <Link
           key={index}
           className={cn(
-            "hover:bg-secondary/80 text-muted-foreground hover:text-foreground flex items-center gap-3 rounded-lg px-3 py-2 transition-all",
+            "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:bg-secondary/80 hover:text-foreground",
             {
               "bg-secondary/80": isActive(item.href),
               "!text-foreground": isActive(item.href),

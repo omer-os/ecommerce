@@ -124,6 +124,8 @@ model Order {
   orderDate DateTime?
   status    orderStatus   @default(PENDING)
   total     Float         @default(0)
+  latitude  Float?         
+  longitude Float?         
 }
 
 model OrderDetail {

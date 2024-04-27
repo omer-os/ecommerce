@@ -12,9 +12,6 @@ export default function StFooter() {
           {[
             { title: "Twitter", link: "https://x.com" },
             { title: "Facebook", link: "https://facebook.com" },
-            { title: "Contact", link: "/contact" },
-            { title: "Privacy", link: "/privacy" },
-            { title: "Terms", link: "/terms" },
           ].map((item, index) => (
             <Link
               key={index}

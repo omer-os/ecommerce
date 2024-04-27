@@ -19,8 +19,33 @@ export const GetTotalOrdersNumber = async () => {
   return orders.length;
 };
 
+export const getOrders = async () => {
+  const session = await getServerAuthSession();
+
+  if (!session) throw new Error("Not authenticated");
+
+  const orders = await db.order.findMany({
+    where: {
+      userId: session.user.id,
+    },
+    include: {
+      User: true,
+    },
+  });
+
+  return orders;
+};
+
 // mutations
-export const createOrder = async ({ products }: { products: Product[] }) => {
+export const createOrder = async ({
+  products,
+  lat,
+  lng,
+}: {
+  products: Product[];
+  lat?: number;
+  lng?: number;
+}) => {
   const session = await getServerAuthSession();
 
   if (!session) throw new Error("Not authenticated");
@@ -45,6 +70,8 @@ export const createOrder = async ({ products }: { products: Product[] }) => {
           })),
         },
       },
+      latitude: lat,
+      longitude: lng,
     },
   });
 

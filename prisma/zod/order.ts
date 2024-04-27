@@ -9,6 +9,8 @@ export const OrderModel = z.object({
   orderDate: z.date().nullish(),
   status: z.nativeEnum(orderStatus),
   total: z.number(),
+  latitude: z.number().nullish(),
+  longitude: z.number().nullish(),
 })
 
 export interface CompleteOrder extends z.infer<typeof OrderModel> {
