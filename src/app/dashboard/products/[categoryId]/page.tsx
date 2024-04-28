@@ -3,6 +3,7 @@ import React from "react";
 import GobackButton from "~/components/custom/buttons/goback-button";
 import DsProductsGrid from "~/components/custom/grids/ds-products-grid";
 import { Button } from "~/components/ui/button";
+import { getFeaturedCategories } from "~/server/actions/featured-categories";
 import { getProducts } from "~/server/actions/product";
 
 export default async function Page({
@@ -16,6 +17,8 @@ export default async function Page({
     categoryId: params.categoryId,
   });
 
+  const featuredCategories = await getFeaturedCategories();
+
   return (
     <div className="p-4">
       <GobackButton>
@@ -26,9 +29,13 @@ export default async function Page({
       </GobackButton>
 
       <h1 className="mt-4 text-3xl font-bold">Category Name</h1>
-      <p className="text-muted-foreground mt-1">Category Description</p>
+      <p className="mt-1 text-muted-foreground">Category Description</p>
       <div className="mt-3">
-        <DsProductsGrid categoryId={params.categoryId} products={products} />
+        <DsProductsGrid
+          featuredCategories={featuredCategories}
+          categoryId={params.categoryId}
+          products={products}
+        />
       </div>
     </div>
   );

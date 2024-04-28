@@ -86,16 +86,19 @@ model Category {
 }
 
 model Product {
-  id          String        @id @default(cuid()) /// @zod.optional()
-  name        String
-  description String?
-  price       Float         @default(0)
-  image       String?
-  imageUrls   String[]
-  categoryId  String
-  Category    Category      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  ProductView ProductView[]
-  OrderDetail OrderDetail[]
+  id                   String              @id @default(cuid()) /// @zod.optional()
+  name                 String
+  description          String?
+  price                Float               @default(0)
+  image                String?
+  imageUrls            String[]
+  categoryId           String
+  Category             Category            @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  ProductView          ProductView[]
+  OrderDetail          OrderDetail[]
+  createdAt            DateTime            @default(now())
+  FeaturedCategories   FeaturedCategories? @relation(fields: [featuredCategoriesId], references: [id])
+  featuredCategoriesId String?
 }
 
 model ProductView {
@@ -125,8 +128,8 @@ model Order {
   orderDate DateTime?
   status    orderStatus   @default(PENDING)
   total     Float         @default(0)
-  latitude  Float?         
-  longitude Float?         
+  latitude  Float?
+  longitude Float?
 }
 
 model OrderDetail {
@@ -137,6 +140,13 @@ model OrderDetail {
   price     Float
   Order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   Product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model FeaturedCategories {
+  id       String    @id @default(cuid())
+  title    String
+  subtitle String
+  products Product[]
 }
 
 enum UserRole {

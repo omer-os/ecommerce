@@ -1,16 +1,19 @@
 import React from "react";
 import DsProductCard from "../cards/ds-product-card";
-import { Product } from "@prisma/client";
+import { FeaturedCategories, Product } from "@prisma/client";
 import CreateProductSheet from "../sheets/create-product-sheet";
 import { Card, CardDescription, CardTitle } from "~/components/ui/card";
 import { Plus } from "lucide-react";
+import DsFeaturedCategoriesManagement from "../other/ds-featured-categories-management";
 
 export default function DsProductsGrid({
   products,
   categoryId,
+  featuredCategories,
 }: {
   products: Product[];
   categoryId: string;
+  featuredCategories: FeaturedCategories[];
 }) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -30,6 +33,8 @@ export default function DsProductsGrid({
           </CardDescription>
         </Card>
       </CreateProductSheet>
+
+      <DsFeaturedCategoriesManagement featuredCategories={featuredCategories} />
     </div>
   );
 }
