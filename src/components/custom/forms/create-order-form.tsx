@@ -40,6 +40,8 @@ export default function CreateOrderForm() {
         image: product.image,
         categoryId: product.categoryId,
         imageUrls: product.imageUrls,
+        createdAt: product.createdAt,
+        featuredCategoriesId: product.featuredCategoriesId,
       })),
     });
 
