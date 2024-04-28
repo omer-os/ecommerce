@@ -11,6 +11,9 @@ import { updateProduct } from "~/server/actions/product";
 const schema = ProductModel.omit({
   categoryId: true,
   id: true,
+  createdAt: true,
+  featuredCategoriesId: true,
+  image: true,
 });
 
 export default function UpdateProductForm({ product }: { product: Product }) {
@@ -24,6 +27,7 @@ export default function UpdateProductForm({ product }: { product: Product }) {
         ...data,
         categoryId: product.categoryId,
         id: product.id,
+        createdAt: product.createdAt,
       });
 
       return res;

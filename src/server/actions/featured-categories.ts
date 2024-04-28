@@ -43,3 +43,25 @@ export const removeFeaturedCategory = async (id: string) => {
 
   return res;
 };
+
+export const addProductToFeaturedCategory = async (
+  productId: string,
+  categoryId: string,
+) => {
+  const res = await db.featuredCategories.update({
+    where: {
+      id: categoryId,
+    },
+    data: {
+      products: {
+        connect: {
+          id: productId,
+        },
+      },
+    },
+  });
+
+  revalidatePath(`/dashboard/featured`);
+
+  return res;
+};

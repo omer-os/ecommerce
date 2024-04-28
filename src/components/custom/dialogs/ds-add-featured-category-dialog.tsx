@@ -1,6 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
 import {
@@ -20,11 +20,15 @@ export default function DsAddFeaturedCategoryDialog({
 }: {
   children: React.ReactNode;
 }) {
+  const [loading, setLoading] = useState(false);
+
   const submitHandeler = async (formData: FormData) => {
     const name = formData.get("title");
     const subtitle = formData.get("subtitle");
 
     if (name) {
+      setLoading(true);
+
       const result = await addFeaturedCategory({
         subtitle: subtitle?.toString() ?? "",
         title: name.toString(),
@@ -33,6 +37,7 @@ export default function DsAddFeaturedCategoryDialog({
       if (result) {
         toast.success("Featured category added successfully!");
       }
+      setLoading(false);
     }
   };
 
@@ -54,7 +59,9 @@ export default function DsAddFeaturedCategoryDialog({
 
             <DialogFooter>
               <Button variant={"secondary"}>Cancel</Button>
-              <Button type="submit">Add</Button>
+              <Button loading={loading} type="submit">
+                Add
+              </Button>
             </DialogFooter>
           </form>
         </DialogContent>

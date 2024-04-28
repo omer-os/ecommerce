@@ -20,6 +20,8 @@ const schema = ProductModel.omit({
   id: true,
   imageUrls: true,
   image: true,
+  featuredCategoriesId: true,
+  createdAt: true,
 });
 
 export default function CreateProductForm({
@@ -74,6 +76,7 @@ export default function CreateProductForm({
         ...data,
         categoryId,
         imageUrls: filteredUrls,
+        createdAt: new Date(),
       });
 
       if (result) {

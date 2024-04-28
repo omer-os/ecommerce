@@ -16,9 +16,12 @@ import {
 import Link from "next/link";
 import { cn } from "~/lib/utils";
 import { usePathname } from "next/navigation";
+import { sidebaratom } from "~/lib/global-atoms";
+import { useAtom } from "jotai";
 
 export default function DsSidebarMenu() {
   const pathname = usePathname();
+  const [isSidebarOpen, setIsSidebarOpen] = useAtom(sidebaratom);
 
   const isActive = (href: string) => {
     if (href === "/dashboard" && pathname === "/dashboard") return true;
@@ -78,6 +81,7 @@ export default function DsSidebarMenu() {
             },
           )}
           href={item.href}
+          onClick={() => setIsSidebarOpen(false)}
         >
           <item.icon className="h-4 w-4" />
           {item.label}

@@ -1,4 +1,5 @@
 import React from "react";
+import DsRemoveFeaturedCategoryAlert from "~/components/custom/alert-dialogs/ds-remove-featuredcategory-alert";
 import DsProductCard from "~/components/custom/cards/ds-product-card";
 import DsAddFeaturedCategoryDialog from "~/components/custom/dialogs/ds-add-featured-category-dialog";
 import { Button } from "~/components/ui/button";
@@ -33,23 +34,18 @@ export default async function Page() {
               <CardDescription>{category.subtitle}</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex gap-4">
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 {category.products.map((product, index) => (
                   <DsProductCard key={index} product={product} />
                 ))}
               </div>
             </CardContent>
             <CardFooter>
-              {/* <form
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const result = await removeFeaturedCategory(category.id);
-                }}
-              >
+              <DsRemoveFeaturedCategoryAlert category={category}>
                 <Button size={"sm"} variant={"destructive"}>
                   Remove Category
                 </Button>
-              </form> */}
+              </DsRemoveFeaturedCategoryAlert>
             </CardFooter>
           </Card>
         ))}
