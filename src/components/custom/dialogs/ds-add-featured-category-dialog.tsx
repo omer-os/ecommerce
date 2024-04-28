@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache";
+"use client";
 import { useParams } from "next/navigation";
 import React from "react";
 import { toast } from "sonner";
@@ -20,8 +20,6 @@ export default function DsAddFeaturedCategoryDialog({
 }: {
   children: React.ReactNode;
 }) {
-  const params = useParams() as { categoryId: string };
-
   const submitHandeler = async (formData: FormData) => {
     const name = formData.get("title");
     const subtitle = formData.get("subtitle");
@@ -30,7 +28,6 @@ export default function DsAddFeaturedCategoryDialog({
       const result = await addFeaturedCategory({
         subtitle: subtitle?.toString() ?? "",
         title: name.toString(),
-        categoryId: params.categoryId,
       });
 
       if (result) {
@@ -40,7 +37,7 @@ export default function DsAddFeaturedCategoryDialog({
   };
 
   return (
-    <div>
+    <>
       <Dialog>
         <DialogTrigger asChild>{children}</DialogTrigger>
 
@@ -62,6 +59,6 @@ export default function DsAddFeaturedCategoryDialog({
           </form>
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   );
 }

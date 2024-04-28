@@ -5,18 +5,20 @@ import { db } from "../db";
 
 // queries
 export const getFeaturedCategories = async () => {
-  return db.featuredCategories.findMany();
+  return db.featuredCategories.findMany({
+    include: {
+      products: true,
+    },
+  });
 };
 
 // mutations
 export const addFeaturedCategory = async ({
   title,
   subtitle,
-  categoryId,
 }: {
   title: string;
   subtitle: string;
-  categoryId: string;
 }) => {
   const res = await db.featuredCategories.create({
     data: {
@@ -25,7 +27,19 @@ export const addFeaturedCategory = async ({
     },
   });
 
-  revalidatePath(`/dashboard/products/${categoryId}`);
+  revalidatePath(`/dashboard/featured`);
+
+  return res;
+};
+
+export const removeFeaturedCategory = async (id: string) => {
+  const res = await db.featuredCategories.delete({
+    where: {
+      id,
+    },
+  });
+
+  revalidatePath("/dashboard/featured");
 
   return res;
 };

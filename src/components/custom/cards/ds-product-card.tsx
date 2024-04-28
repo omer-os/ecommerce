@@ -1,3 +1,4 @@
+"use client";
 import { Product } from "@prisma/client";
 import { Edit } from "lucide-react";
 import Link from "next/link";

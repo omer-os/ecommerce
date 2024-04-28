@@ -6,6 +6,7 @@ import {
   BoxIcon,
   CreditCardIcon,
   DollarSignIcon,
+  Dot,
   HomeIcon,
   Lock,
   SettingsIcon,
@@ -55,6 +56,11 @@ export default function DsSidebarMenu() {
           icon: Users,
           label: "Orders",
           href: "/dashboard/orders",
+        },
+        {
+          icon: Dot,
+          label: "Featured",
+          href: "/dashboard/featured",
         },
         {
           icon: SettingsIcon,

@@ -4,7 +4,6 @@ import { FeaturedCategories, Product } from "@prisma/client";
 import CreateProductSheet from "../sheets/create-product-sheet";
 import { Card, CardDescription, CardTitle } from "~/components/ui/card";
 import { Plus } from "lucide-react";
-import DsFeaturedCategoriesManagement from "../other/ds-featured-categories-management";
 
 export default function DsProductsGrid({
   products,
@@ -33,8 +32,6 @@ export default function DsProductsGrid({
           </CardDescription>
         </Card>
       </CreateProductSheet>
-
-      <DsFeaturedCategoriesManagement featuredCategories={featuredCategories} />
     </div>
   );
 }
