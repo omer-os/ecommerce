@@ -44,7 +44,7 @@ export default function StHeroCarousel({ images }: { images: string[] }) {
         }}
         className="overflow-hidden rounded-xl"
       >
-        <CarouselContent className="h-[40em]  rounded-xl">
+        <CarouselContent className="h-[20em] rounded-xl  sm:h-[40em]">
           {images.map((image, index) => (
             <CarouselItem key={index}>
               <img
