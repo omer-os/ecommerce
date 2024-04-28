@@ -29,28 +29,23 @@ export default function CreateOrderForm() {
   const [orders, setOrders] = useAtom(ordersAtom);
   const [loading, setLoading] = useState(false);
 
-  const SubmitHandeler = async (values: z.infer<typeof schema>) => {
+  const submitHandler = async (values: z.infer<typeof schema>) => {
     setLoading(true);
     const res = await createOrder({
-      products: [
-        ...orders.products.map((product) => ({
-          id: product.id,
-          name: product.name,
-          description: product.description,
-          price: product.price,
-          image: product.image,
-          categoryId: product.categoryId,
-          imageUrls: product.imageUrls,
-        })),
-      ],
+      products: orders.products.map((product) => ({
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        image: product.image,
+        categoryId: product.categoryId,
+        imageUrls: product.imageUrls,
+      })),
     });
 
     if (res) {
-      setOrders((prev) => {
-        return {
-          ...prev,
-          products: [],
-        };
+      setOrders({
+        products: [],
       });
 
       toast.success("Order placed successfully");
@@ -70,7 +65,7 @@ export default function CreateOrderForm() {
         </CardHeader>
 
         <CardContent>
-          <AutoForm formSchema={schema} onSubmit={SubmitHandeler}>
+          <AutoForm formSchema={schema} onSubmit={submitHandler}>
             <Button loading={loading} type="submit">
               Place Order
             </Button>

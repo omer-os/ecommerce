@@ -1,6 +1,6 @@
 "use client";
-import { useAtom } from "jotai";
 import React from "react";
+import { useAtom } from "jotai";
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { ordersAtom } from "~/lib/global-atoms";
 import StCartItemCart from "../cards/st-cart-item-cart";
@@ -11,33 +11,14 @@ export default function OrderSummary() {
   return (
     <>
       <div className="flex h-full flex-col gap-2 pt-5">
-        <ScrollArea className="h-[60vh]">
-          {Array.from(
-            new Set(orders.products.map((product) => product.id)),
-          ).map((productId) => {
-            const product = orders.products.find((p) => p.id === productId);
-            const quantity = orders.products.filter(
-              (p) => p.id === productId,
-            ).length;
-
-            return (
-              <StCartItemCart
-                quantity={quantity}
-                product={
-                  product || {
-                    id: "",
-                    name: "",
-                    description: null,
-                    price: 0,
-                    image: null,
-                    categoryId: "",
-                    imageUrls: [],
-                  }
-                }
-                key={productId}
-              />
-            );
-          })}
+        <ScrollArea className="h-full max-h-[60vh]">
+          {orders.products.map((product) => (
+            <StCartItemCart
+              quantity={product.quantity}
+              product={product}
+              key={product.id}
+            />
+          ))}
         </ScrollArea>
       </div>
 
@@ -50,8 +31,10 @@ export default function OrderSummary() {
           <p>Total</p>
           <p className="text-right text-base text-black dark:text-white">
             {orders.products
-              .map((p) => p.price)
-              .reduce((prev, curr) => prev + curr, 0)
+              .reduce(
+                (total, product) => total + product.price * product.quantity,
+                0,
+              )
               .toLocaleString()}{" "}
             IQD
           </p>

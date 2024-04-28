@@ -4,9 +4,11 @@ import { atom } from "jotai";
 const sidebaratom = atom(false);
 
 const ordersAtom = atom<{
-  products: (Product)[] 
+  products: (Product & {
+    quantity: number;
+  })[];
 }>({
   products: [],
 });
 
-export { sidebaratom,ordersAtom };
+export { sidebaratom, ordersAtom };

@@ -20,7 +20,9 @@ export default async function StNavbar({ store }: { store?: Store }) {
         </Link>
 
         <div className="flex items-center gap-4">
-          <StCartSheet>
+          <StCartSheet
+          withCountBadge
+          >
             <Button size={"icon"} variant={"outline"}>
               <ShoppingBag size={16} />
             </Button>

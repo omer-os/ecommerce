@@ -21,9 +21,22 @@ export default function AddToCartButton({
       onClick={() => {
         if (product) {
           setOrders((prev) => {
+            const productIndex = prev.products.findIndex(
+              (p) => p.id === product.id,
+            );
+
+            if (productIndex === -1) {
+              return {
+                ...prev,
+                products: [...prev.products, { ...product, quantity: 1 }],
+              };
+            }
+
             return {
               ...prev,
-              products: [...prev.products, product],
+              products: prev.products.map((p, i) =>
+                i === productIndex ? { ...p, quantity: p.quantity + 1 } : p,
+              ),
             };
           });
         }

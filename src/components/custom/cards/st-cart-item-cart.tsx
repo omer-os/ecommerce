@@ -14,32 +14,17 @@ export default function StCartItemCart({
   const [count, setCount] = useState(quantity);
   const [orders, setOrders] = useAtom(ordersAtom);
 
+  const updateQuantity = (productId: string, newQuantity: number) => {
+    setOrders((prev) => ({
+      ...prev,
+      products: prev.products.map((p) =>
+        p.id === productId ? { ...p, quantity: newQuantity } : p,
+      ),
+    }));
+  };
+
   useEffect(() => {
-    setOrders((prev) => {
-      const updatedProducts = prev.products.map((p) => {
-        if (p.id === product.id) {
-          return {
-            ...p,
-            quantity: count,
-          };
-        }
-        return p;
-      });
-
-      return {
-        ...prev,
-        products: updatedProducts,
-      };
-    });
-
-    if (count === 0) {
-      setOrders((prev) => {
-        return {
-          ...prev,
-          products: prev.products.filter((p) => p.id !== product.id),
-        };
-      });
-    }
+    updateQuantity(product.id, count);
   }, [count]);
 
   return (
